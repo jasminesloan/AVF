@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  	<title>Geolocation</title>
+
+		<!-- Mobile viewport optimized: j.mp/bplateviewport -->
+    <meta name="HandheldFriendly" content="True"/>
+    <meta name="MobileOptimized" content="320"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <!-- Mobile IE needs ClearType for smoothing fonts -->
+    <meta http-equiv="cleartype" content="on"/>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		
+	
+		<link rel="stylesheet" href="css/style.css" />
+
+	</head>
+	
+
+  		<body>
+    <!-- Header -->
+    <header>
+      <a href="../index.html" id="back">Back</a>
+      <h1>Location</h1>
+    </header>
+    <section id="geolocation">
+    <section id="content">
+    <p class="intro" id="demo">Your location</p>
+      <div id="mapView">
+        <center>
+          <h2 id="loading">Loading Map...</h2>
+          <img id="map" src=""/>
+          <button onclick="getLocation()">Your Location</button>
+          <section id="mapholder"></section>
+        </center>
+        
+      </div>
+    </section>
+    </section>
+    
+	  <!-- Main JS -->
+    <script type="text/javascript" src="js/geolocation.js"></script>
+    <!-- Cordova JS-->
+    <script type="text/javascript" src="../js/libs/cordova-2.1.0.js"></script>
+
+
+	</body>
+</html>
