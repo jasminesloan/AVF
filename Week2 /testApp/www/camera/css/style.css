@@ -51,6 +51,7 @@ h1 {
   width: 100%;
 }
 button {
+  background: white;
   color: #900;
   border: 3px solid black;
   font-weight: bold;

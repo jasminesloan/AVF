@@ -1,82 +1,76 @@
-var pictureSource;   // picture source
-var destinationType; // sets the format of returned value
 
-// Wait for PhoneGap to connect with the device
-//
-document.addEventListener("deviceready",onDeviceReady,false);
+//image source
+var imageSource;
 
-// PhoneGap is ready to be used!
-//
+//set format of returned value
+var destinationType;
+
+function onBodyLoad() {
+    document.addEventListener("deviceready",onDeviceReady,false);
+  //  console.log('deviceready');
+}
+
+/* PhoneGap is initialized */
 function onDeviceReady() {
-    pictureSource=navigator.camera.PictureSourceType;
-    destinationType=navigator.camera.DestinationType;
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
+        console.log('Initialize PhoneGap');
 }
 
-// Called when a photo is successfully retrieved
-//
-function onPhotoDataSuccess(imageData) {
-    // Uncomment to view the base64 encoded image data
-    // console.log(imageData);
-    
+// Call when Image successfully received
+function onPhotoDataSuccess(imageData) { 
     // Get image handle
-    //
-    var smallImage = document.getElementById('smallImage');
-    
+    var myImage = document.getElementById('myImage');   
     // Unhide image elements
-    //
-    smallImage.style.display = 'block';
-    
-    // Show the captured photo
-    // The inline CSS rules are used to resize the image
-    //
-    smallImage.src = "data:image/jpeg;base64," + imageData;
+    myImage.style.display = 'block';    
+    // Show captured photo
+    myImage.src = "data:image/jpeg;base64," + imageData;
 }
 
-// Called when a photo is successfully retrieved
-//
+// Called when image is received
 function onPhotoURISuccess(imageURI) {
-    // Uncomment to view the image file URI
-    // console.log(imageURI);
-    
+	console.log(imageURI);
     // Get image handle
-    //
-    var largeImage = document.getElementById('largeImage');
-    
+    var myImage = document.getElementById('myImage');    
     // Unhide image elements
-    //
-    largeImage.style.display = 'block';
-    
+    myImage.style.display = 'block';   
     // Show the captured photo
-    // The inline CSS rules are used to resize the image
-    //
-    largeImage.src = imageURI;
+    myImage.src = imageURI;
 }
 
-// A button will call this function
-//
+// Use a button to call this
 function capturePhoto() {
     // Take picture using device camera and retrieve image as base64-encoded string
-    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
+    try {
+        navigator.camera.getPicture(onSuccess, onFail, { quality: 90, destinationType: destinationType.FILE_URI, saveToPhotoAlbum: true  });
+    }
+    catch (err) {
+        alert(err);
+    }
 }
 
-// A button will call this function
-//
+// Use a button to call this
 function capturePhotoEdit() {
-    // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
-    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true });
+    try {
+        // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
+        navigator.camera.getPicture(onSuccess, onFail, { quality: 70, allowEdit: true, saveToPhotoAlbum: true  });
+    }catch (err) {
+        alert(err);
+    }
 }
 
-// A button will call this function
-//
+// Use Button to call this
 function getPhoto(source) {
-    // Retrieve image file location from specified source
-    navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
-                                destinationType: destinationType.FILE_URI,
-                                sourceType: source });
+    try {
+        // Get image file location from specified source
+        navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+                                    destinationType: destinationType.FILE_URI,
+                                    sourceType: source, saveToPhotoAlbum: true });
+    }catch (err) {
+        alert(err);
+    }
 }
 
-// Called if something bad happens.
-//
 function onFail(message) {
-    alert('Failed because: ' + message);
+    alert('Error!: ' + message);
 }

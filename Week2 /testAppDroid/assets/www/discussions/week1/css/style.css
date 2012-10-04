@@ -37,3 +37,11 @@ h1 {
   text-decoration: none;
   z-index: 10;
 }
+h1 {
+  color: white;
+  font-family: Sketch Serif;
+  font-size: 30px;
+  margin: 0px;
+  padding: 2.5% 0% 2.5% 8%;
+  text-align: center;
+}
