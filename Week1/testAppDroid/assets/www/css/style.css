@@ -28,7 +28,6 @@ body {
   z-index: 10;
 }
 header h1 {
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#353535', endColorstr='#0a0809',GradientType=0 ); /* IE6-9 */
   color: white;
   font-family: Sketch Serif;
   font-size: 30px;
@@ -106,6 +105,7 @@ h3, a {
   color: white;
   text-align: center;
 }
+
 p {
   font-family: Sketch Serif;
   font-size: 16px;
