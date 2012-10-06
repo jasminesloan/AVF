@@ -1,82 +1,62 @@
-var pictureSource;   // picture source
-var destinationType; // sets the format of returned value
+// Globals to store camera and module
+// --------------------------------------------------------------------------
+var module;
+var camera;
 
-// Wait for PhoneGap to connect with the device
-//
-document.addEventListener("deviceready",onDeviceReady,false);
+// --------------------------------------------------------------------------
+// Capture functions
+// --------------------------------------------------------------------------
+var onCaptureImageSuccess = function (imageBuffer) {
+    console.log("onCaptureImageSuccess");
 
-// PhoneGap is ready to be used!
-//
-function onDeviceReady() {
-    pictureSource=navigator.camera.PictureSourceType;
-    destinationType=navigator.camera.DestinationType;
+    // Image capture success; create a DataURL from BlobBuilder and
+    // display as an image
+
+    var image = document.getElementById('image');
+    if (image.src) {
+        // Don't leak; release previous objectURL
+        webkitURL.revokeObjectURL(image.src);
+    }
+
+    var builder = new WebKitBlobBuilder();
+    builder.append(imageBuffer);
+    image.src = webkitURL.createObjectURL(builder.getBlob());
 }
 
-// Called when a photo is successfully retrieved
-//
-function onPhotoDataSuccess(imageData) {
-    // Uncomment to view the base64 encoded image data
-    // console.log(imageData);
-    
-    // Get image handle
-    //
-    var smallImage = document.getElementById('smallImage');
-    
-    // Unhide image elements
-    //
-    smallImage.style.display = 'block';
-    
-    // Show the captured photo
-    // The inline CSS rules are used to resize the image
-    //
-    smallImage.src = "data:image/jpeg;base64," + imageData;
+var onCaptureClicked = function () {
+    console.log("onCaptureClicked");
+    camera.captureImage(onCaptureImageSuccess);
 }
 
-// Called when a photo is successfully retrieved
-//
-function onPhotoURISuccess(imageURI) {
-    // Uncomment to view the image file URI
-    // console.log(imageURI);
-    
-    // Get image handle
-    //
-    var largeImage = document.getElementById('largeImage');
-    
-    // Unhide image elements
-    //
-    largeImage.style.display = 'block';
-    
-    // Show the captured photo
-    // The inline CSS rules are used to resize the image
-    //
-    largeImage.src = imageURI;
-}
+// --------------------------------------------------------------------------
+// Main load function
+// --------------------------------------------------------------------------
+var onLoad = function() {
+    console.log("onLoad");
 
-// A button will call this function
-//
-function capturePhoto() {
-    // Take picture using device camera and retrieve image as base64-encoded string
-    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
-}
+    var onCreatePreviewNodeSuccess = function (previewElement) {
+        // Preview node created; set height/width and add to DOM
+        console.log("onCreatePreviewNodeSuccess");
+        previewElement.height = 250;
+        previewElement.width = 250;
+        document.getElementById("preview_div").appendChild(previewElement);
+    }
 
-// A button will call this function
-//
-function capturePhotoEdit() {
-    // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
-    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true });
-}
+    var onGetCamerasSuccess = function(cameras) {
+        // Save camera and create preview
+        console.log("onGetCamerasSuccess");
+        camera = cameras[0];
+        console.log("  camera id: " + camera.id);
+        camera.createPreviewNode(onCreatePreviewNodeSuccess);
+    }
 
-// A button will call this function
-//
-function getPhoto(source) {
-    // Retrieve image file location from specified source
-    navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
-                                destinationType: destinationType.FILE_URI,
-                                sourceType: source });
-}
+    var onCameraLoadSuccess = function(cameraModule) {
+        // Module load success; get cameras
+        console.log("onCameraLoadSuccess");
+        module = cameraModule;
+        module.getCameras(onGetCamerasSuccess);
+    }
 
-// Called if something bad happens.
-//
-function onFail(message) {
-    alert('Failed because: ' + message);
-}
+    console.log("  loading camera module...");
+    navigator.loadModule('camera', onCameraLoadSuccess);
+} 
