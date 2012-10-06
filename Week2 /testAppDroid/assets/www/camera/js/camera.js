@@ -1,76 +1,82 @@
+var pictureSource;   // picture source
+var destinationType; // sets the format of returned value
 
-//image source
-var imageSource;
+// Wait for PhoneGap to connect with the device
+//
+document.addEventListener("deviceready",onDeviceReady,false);
 
-//set format of returned value
-var destinationType;
-
-function onBodyLoad() {
-    document.addEventListener("deviceready",onDeviceReady,false);
-  //  console.log('deviceready');
-}
-
-/* PhoneGap is initialized */
+// PhoneGap is ready to be used!
+//
 function onDeviceReady() {
-        pictureSource=navigator.camera.PictureSourceType;
-        destinationType=navigator.camera.DestinationType;
-        console.log('Initialize PhoneGap');
+    pictureSource=navigator.camera.PictureSourceType;
+    destinationType=navigator.camera.DestinationType;
 }
 
-// Call when Image successfully received
-function onPhotoDataSuccess(imageData) { 
+// Called when a photo is successfully retrieved
+//
+function onPhotoDataSuccess(imageData) {
+    // Uncomment to view the base64 encoded image data
+    // console.log(imageData);
+    
     // Get image handle
-    var myImage = document.getElementById('myImage');   
+    //
+    var smallImage = document.getElementById('smallImage');
+    
     // Unhide image elements
-    myImage.style.display = 'block';    
-    // Show captured photo
-    myImage.src = "data:image/jpeg;base64," + imageData;
-}
-
-// Called when image is received
-function onPhotoURISuccess(imageURI) {
-	console.log(imageURI);
-    // Get image handle
-    var myImage = document.getElementById('myImage');    
-    // Unhide image elements
-    myImage.style.display = 'block';   
+    //
+    smallImage.style.display = 'block';
+    
     // Show the captured photo
-    myImage.src = imageURI;
+    // The inline CSS rules are used to resize the image
+    //
+    smallImage.src = "data:image/jpeg;base64," + imageData;
 }
 
-// Use a button to call this
+// Called when a photo is successfully retrieved
+//
+function onPhotoURISuccess(imageURI) {
+    // Uncomment to view the image file URI
+    // console.log(imageURI);
+    
+    // Get image handle
+    //
+    var largeImage = document.getElementById('largeImage');
+    
+    // Unhide image elements
+    //
+    largeImage.style.display = 'block';
+    
+    // Show the captured photo
+    // The inline CSS rules are used to resize the image
+    //
+    largeImage.src = imageURI;
+}
+
+// A button will call this function
+//
 function capturePhoto() {
     // Take picture using device camera and retrieve image as base64-encoded string
-    try {
-        navigator.camera.getPicture(onSuccess, onFail, { quality: 90, destinationType: destinationType.FILE_URI, saveToPhotoAlbum: true  });
-    }
-    catch (err) {
-        alert(err);
-    }
+    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
 }
 
-// Use a button to call this
+// A button will call this function
+//
 function capturePhotoEdit() {
-    try {
-        // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
-        navigator.camera.getPicture(onSuccess, onFail, { quality: 70, allowEdit: true, saveToPhotoAlbum: true  });
-    }catch (err) {
-        alert(err);
-    }
+    // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
+    navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true });
 }
 
-// Use Button to call this
+// A button will call this function
+//
 function getPhoto(source) {
-    try {
-        // Get image file location from specified source
-        navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-                                    destinationType: destinationType.FILE_URI,
-                                    sourceType: source, saveToPhotoAlbum: true });
-    }catch (err) {
-        alert(err);
-    }
+    // Retrieve image file location from specified source
+    navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+                                destinationType: destinationType.FILE_URI,
+                                sourceType: source });
 }
 
+// Called if something bad happens.
+//
 function onFail(message) {
-    alert('Error!: ' + message);
+    alert('Failed because: ' + message);
 }

@@ -24,34 +24,23 @@
     </header>
 	
 	
-  	<body>
+  	
         
-        <center>
-            <img id="picture" src=""/>
-        </center>
-        
-        <section id="section2" class="content">
-            
-            <button class="apple" onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button>
-            <button onclick="capturePhoto();">Capture Photo</button> <br>
-            <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
-            <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
-        </section>
-        
-        <section class="content">
-            <div class="pic">
-                <img class="content" style="display:none;" id="smallImage" src="" />
-                <img class="content" style="display:none;" id="largeImage" src="" />
-            </div>
-        </section>
+        <body onLoad="onLoad()">
+			<section id="preview_div" style="width: 250px; height: 250px;"></section>
+			<section><img id='image' width='250' height='250'></img></section>
+            <button onClick="onCaptureClicked()">Capture</button>
+		
         
         
         
         
         <!--plugins-->
-        <script type="text/javascript" src="js/camera.js"></script>
-        
         <script type="text/javascript" src="../js/libs/cordova-2.1.0.js"></script>
         
-	</body>
+        <script type="text/javascript" src="js/camera.js"></script>
+        
+
+      </body>  
+	
 </html>
