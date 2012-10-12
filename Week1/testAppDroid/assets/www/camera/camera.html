@@ -17,43 +17,45 @@
         <link type="text/css" rel="stylesheet" href="css/style.css"/>
         
 	</head>
+  	
+    <body>
     <!-- Header -->
     <header>
-        <a href="../index.html" id="back">Back</a>
-        <h1>Camera</h1>
+      <a href="../index.html" id="back">Back</a>
+      <h1>Camera</h1>
     </header>
-	
-	
-  	<body>
-        
+    
+    <section id="content">
+      <div id="picture_div">
         <center>
-            <img id="picture" src=""/>
+          <img id="picture" src=""/>
+          	
+          		<a href="#" id="camera">Take A Picture</a>
         </center>
-        
-        <section id="section2" class="content">
-            
-            <button class="apple" onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button>
-            <button onclick="capturePhoto();">Capture Photo</button> <br>
-            <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
-            <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
-        </section>
-        
-        <section class="content">
-            <div class="pic">
-                <img class="content" style="display:none;" id="smallImage" src="" />
-                <img class="content" style="display:none;" id="largeImage" src="" />
-            </div>
-        </section>
+      </div>
+    </section>
+    <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
+    <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
         
         
-        
+    <section>
+      <!-- Preview Picture -->
+      <section id="prePic">
+        <h2 class="title">Preview Picture</h2>
+        <center>
+          <section class="icon">
+            <img id="preview" src="" alt="Preview Picture"/>
+          </section>
+        </center>
+      </section>
         
         <!--plugins-->
-        <script type="text/javascript" src="../js/libs/cordova-2.1.0.js"></script>
+        <script type="text/javascript" src="../cordova-2.1.0.js"></script>
         
-        <script type="text/javascript" src="js/camera.js"></script>
+        <script src="http://code.jquery.com/jquery.js"></script>
         
+        <script type="text/javascript" src="../js/main.js"></script>
 
-        
-	</body>
+      </body>  
+	
 </html>

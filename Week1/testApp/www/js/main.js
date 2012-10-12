@@ -47,3 +47,82 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+	$("#camera").on("click", function(){
+		accessCamera();
+});
+
+	var accessCamera = function(){
+		navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+			destinationType: Camera.DestinationType.FILE_URI,
+		targetWidth: 250,
+		targetHeight: 450});
+
+function onSuccess(imageURI) {
+localStorage.setItem("picture",imageURI);
+displayImage();
+//var image = document.getElementById('myImage');
+//image.src = imageURI;
+//console.log(imageURI);
+	}
+
+	function onFail(message) {
+		alert('Failed because: ' + message);
+	}
+};
+//Display an image
+	var displayImage = function(){
+	var imageLocation = localStorage.getItem("picture");
+		console.log(imageLocation);
+	var ask = confirm("Preview Picture?");
+		if (ask){
+			$("#picturebucket").append('<div id="picture_div" class="picture_div"></div>')
+			$("#picture_div").append('<img id="newpicture" class="newpicture"></img>');
+			$("#newpicture").attr("src",imageLocation);
+		}
+		window.location="#newpicture"
+};
+
+
+function getImage(source) {
+    try {
+        // Get image file location from specified source
+        navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+                                    destinationType: destinationType.FILE_URI,
+                                    sourceType: source, saveToPhotoAlbum: true });
+    }catch (err) {
+        alert(err);
+    }
+}
+
+$(function(){
+	//http://api.twitter.com/1/geo/search.json?query=atlanta&callback=? 
+	$.getJSON("http://search.twitter.com/search.json?q=Obama2012&rpp=10&include_entities=true&result_type=popular&callback=?", function(data){
+	console.log(data);
+	//alert(data.completed_in);
+	$("#datamsg").html("<p>Tweets succesfully obtained.</p>");
+	//alert(data.results[0].created_at);
+	//alert(data.results.length);
+	for (i=0, j=data.results.length; i<j; i++){
+		//alert("data!!");
+		
+		$("#data-output")
+			.append("<li>" +
+				"<p>" + "<img src='" + data.results[i].profile_image_url + "' /><br />" + 
+				data.results[i].text + ", <em>" + data.results[i].created_at +"</em>" + 
+			"</p>" +
+			"</li>");
+		}	
+	});
+});
+
+
+var handleData = function (json) {
+	//console.log(json);
+	for (var i = 0; i < json.friends.length; i++){
+		var friend = json.friends[i];
+		console.log("User ID: " + friend.uuid + ", Name: " + friend.name + ", Age: " + friend.age);	
+	};
+};
+
+
+

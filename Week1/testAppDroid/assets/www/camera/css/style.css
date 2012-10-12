@@ -53,9 +53,32 @@ h1 {
 button {
   background: white;
   color: #900;
-  border: 3px solid black;
+  border: 2px solid black;
   font-weight: bold;
   font-size: 150%;
   text-transform: uppercase;
   font-family: Sketch Serif;
+  margin-bottom: 20px;
+}
+#camera {
+  background: white;
+  color: #900;
+  border: 2px solid black;
+  font-weight: bold;
+  font-size: 150%;
+  text-transform: uppercase;
+  font-family: Sketch Serif;
+  margin-bottom: 20px;
+}
+#prePic {
+  display: none;
+  margin-top: 20px;
+}
+#preview {
+  height: 100px;
+  width: 125px;
+  position: center;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }

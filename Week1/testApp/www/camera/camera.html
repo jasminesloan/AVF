@@ -17,29 +17,44 @@
         <link type="text/css" rel="stylesheet" href="css/style.css"/>
         
 	</head>
+  	
+    <body>
     <!-- Header -->
     <header>
-        <a href="../index.html" id="back">Back</a>
-        <h1>Camera</h1>
+      <a href="../index.html" id="back">Back</a>
+      <h1>Camera</h1>
     </header>
-	
-	
-  	
+    
+    <section id="content">
+      <div id="picture_div">
+        <center>
+          <img id="picture" src=""/>
+          	
+          		<a href="#" id="camera">Take A Picture</a>
+        </center>
+      </div>
+    </section>
+    <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
+    <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
         
-        <body onLoad="onLoad()">
-			<section id="preview_div" style="width: 250px; height: 250px;"></section>
-			<section><img id='image' width='250' height='250'></img></section>
-            <button onClick="onCaptureClicked()">Capture</button>
-		
         
-        
-        
+    <section>
+      <!-- Preview Picture -->
+      <section id="prePic">
+        <h2 class="title">Preview Picture</h2>
+        <center>
+          <section class="icon">
+            <img id="preview" src="" alt="Preview Picture"/>
+          </section>
+        </center>
+      </section>
         
         <!--plugins-->
-        <script type="text/javascript" src="../js/libs/cordova-2.1.0.js"></script>
+        <script type="text/javascript" src="../cordova-2.1.0.js"></script>
         
-        <script type="text/javascript" src="js/camera.js"></script>
+        <script src="http://code.jquery.com/jquery.js"></script>
         
+        <script type="text/javascript" src="../js/main.js"></script>
 
       </body>  
 	
