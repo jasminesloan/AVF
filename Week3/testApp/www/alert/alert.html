@@ -1,0 +1,48 @@
+<html lang="en">
+  <head>
+
+    <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+    <meta name="HandheldFriendly" content="True"/>
+    <meta name="MobileOptimized" content="320"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <!-- Mobile IE needs ClearType for smoothing fonts -->
+    <meta http-equiv="cleartype" content="on"/>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>AVF Launch</title>
+
+    <!-- Main Style -->
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+
+	</head>
+	
+  	<body onload="onBodyLoad()">
+        <header>
+            <a href="../index.html" id="back">Back</a>
+            <h1>Alert</h1>
+        </header>
+	  	<section>
+			<section role="main" id="secondary_content" >
+                
+                <section>
+                	<input type="button" name="name" value="Name" onClick="prompt('What is your name?')">
+	            	<input type="button" name="click" value="Click" onClick="alert('Thanks for the click')">
+	            	<input type="button" name="button" value="Vibrate" onClick="vibrate(); return false;">
+	           </secton>
+            
+	             <section class="push"></section>
+             </section>
+             </section>           
+        </section>
+
+
+	
+	<!--plugins-->
+	<script type="text/javascript" src="js/alert.js"></script>
+	
+	<!--custom js-->	
+	<script type="text/javascript" src="js/main.js"></script>
+
+	</body>
+</html>
