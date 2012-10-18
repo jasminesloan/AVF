@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="HandheldFriendly" content="True"/>
+        <meta name="MobileOptimized" content="320"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        <!-- Mobile IE needs ClearType for smoothing fonts -->
+        <meta http-equiv="cleartype" content="on"/>
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>AVF Launch</title>
+        
+        <!-- Main Style -->
+        <link type="text/css" rel="stylesheet" href="css/style.css"/>
+        
+	</head>
+  	
+    <body>
+    <!-- Header -->
+    <header>
+      <a href="../index.html" id="back">Back</a>
+      <h1>Camera</h1>
+    </header>
+    
+    <section id="content">
+      <div id="picView">
+        <center>
+          <img id="picture" src=""/>
+          	<button id="takePic">Take A Picture</button>
+        </center>
+      </div>
+    </section>
+    <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
+    <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
+
+        
+        <!--plugins-->
+        <script type="text/javascript" src="../cordova-2.1.0.js"></script>
+        
+        <script src="http://code.jquery.com/jquery.js"></script>
+        
+        <script type="text/javascript" src="js/camera.js"></script>
+
+      </body>  
+	
+</html>
