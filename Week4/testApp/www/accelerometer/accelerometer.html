@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="HandheldFriendly" content="True"/>
+        <meta name="MobileOptimized" content="320"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        <!-- Mobile IE needs ClearType for smoothing fonts -->
+        <meta http-equiv="cleartype" content="on"/>
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>AVF Launch</title>
+        
+        <!-- Main Style -->
+        <link type="text/css" rel="stylesheet" href="css/style.css"/>
+        
+	</head>
+  	
+    <body>
+    	
+    
+	    <div data-role="dialog" id="acel">
+			<div data-role="header">
+			<a href="../index.html" id="back">Back</a>
+		    	<h1>Accelerometer</h1>
+		    </div>
+		    <div data-role="content" class="profile-content">
+		 	   <div id="accelerometer">Waiting for accelerometer...</div>
+		       <a href="#" id="stop" data-role="button" onclick="stopWatch();">Stop Watching</a>	
+		    </div>
+		</div>
+        
+        <!--plugins-->
+        <script type="text/javascript" src="../cordova-2.1.0.js"></script>
+        
+        <script src="http://code.jquery.com/jquery.js"></script>
+        
+        <script type="text/javascript" src="js/accelerometer.js"></script>
+
+      </body>  
+	
+</html>
