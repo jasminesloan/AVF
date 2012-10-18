@@ -47,56 +47,13 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
-	$("#camera").on("click", function(){
-		accessCamera();
-});
-
-	var accessCamera = function(){
-		navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-			destinationType: Camera.DestinationType.FILE_URI,
-		targetWidth: 250,
-		targetHeight: 450});
-
-function onSuccess(imageURI) {
-localStorage.setItem("picture",imageURI);
-displayImage();
-//var image = document.getElementById('myImage');
-//image.src = imageURI;
-//console.log(imageURI);
-	}
-
-	function onFail(message) {
-		alert('Failed because: ' + message);
-	}
-};
-//Display an image
-	var displayImage = function(){
-	var imageLocation = localStorage.getItem("picture");
-		console.log(imageLocation);
-	var ask = confirm("Preview Picture?");
-		if (ask){
-			$("#picturebucket").append('<div id="picture_div" class="picture_div"></div>')
-			$("#picture_div").append('<img id="newpicture" class="newpicture"></img>');
-			$("#newpicture").attr("src",imageLocation);
-		}
-		window.location="#newpicture"
-};
 
 
-function getImage(source) {
-    try {
-        // Get image file location from specified source
-        navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
-                                    destinationType: destinationType.FILE_URI,
-                                    sourceType: source, saveToPhotoAlbum: true });
-    }catch (err) {
-        alert(err);
-    }
-}
 
+// ======================Twitter API==================================
 $(function(){
 	//http://api.twitter.com/1/geo/search.json?query=atlanta&callback=? 
-	$.getJSON("http://search.twitter.com/search.json?q=Obama2012&rpp=10&include_entities=true&result_type=popular&callback=?", function(data){
+	$.getJSON("http://search.twitter.com/search.json?q=oomp%20camp&rpp=10&include_entities=true&result_type=recent&callback=?", function(data){
 	console.log(data);
 	//alert(data.completed_in);
 	$("#datamsg").html("<p>Tweets succesfully obtained.</p>");
@@ -116,6 +73,10 @@ $(function(){
 });
 
 
+
+
+//=======================JSON Data============================
+
 var handleData = function (json) {
 	//console.log(json);
 	for (var i = 0; i < json.friends.length; i++){
@@ -124,5 +85,102 @@ var handleData = function (json) {
 	};
 };
 
+// =====================Alert=================================
+
+	function onBodyLoad() {
+		document.addEventListener("deviceready", onDeviceReady, false);
+	}
+
+	function onDeviceReady() {
+		// do your thing!
+		phoneGapReady.innerHTML = ("")
+		
+	}
+	function vibrate() {
+        navigator.notification.vibrate(2000);
+    }
+
+	
+	// alert dialog dismissed
+    function alertDismissed() {
+        // do something
+    }
+    
+    // Show a custom alert
+    //
+    function onClick() {
+        navigator.notification.alert (
+                                     'You clicked Alert!', // message
+                                     alertDismissed, // callback
+                                     'Alert Demo', // title
+                                     'Done' // buttonName
+                                     );
+    }
+    
+    // process the confirmation dialog result
+    function onConfirm(button) {
+        alert('You chose button ' + button);
+    }
+    
+    // Show a custom confirmation dialog
+    //
+    function showConfirm() {
+        navigator.notification.confirm(
+                                       'You clicked Confirm!', // message
+                                       onConfirm, // callback to invoke with index of button pressed
+                                       'Confirm Demo', // title
+                                       'Restart,Exit' // buttonLabels
+                                       );
+    }
+
+// =============GeoLocation==================================
+
+var x=document.getElementById("demo");
+function getLocation()
+{
+    if (navigator.geolocation)
+    {
+        navigator.geolocation.getCurrentPosition(showPosition,showError);
+    }
+    else{x.innerHTML="Geolocation is not supported by this browser.";}
+}
+
+function showPosition(position)
+{
+    lat=position.coords.latitude;
+    lon=position.coords.longitude;
+    latlon=new google.maps.LatLng(lat, lon);
+    mapholder=document.getElementById('mapholder');
+    mapholder.style.height='250px';
+    mapholder.style.width='500px';
+    
+    var myOptions={
+    center:latlon,zoom:14,
+    mapTypeId:google.maps.MapTypeId.ROADMAP,
+    mapTypeControl:false,
+    navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+    };
+    var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);
+    var marker=new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
+}
+
+function showError(error)
+{
+    switch(error.code)
+    {
+        case error.PERMISSION_DENIED:
+            x.innerHTML="User denied the request for Geolocation.";
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML="Location information is unavailable.";
+            break;
+        case error.TIMEOUT:
+            x.innerHTML="The request to get user location timed out.";
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML="An unknown error occurred.";
+            break;
+    }
+}
 
 

@@ -1,62 +1,27 @@
-// Globals to store camera and module
-// --------------------------------------------------------------------------
-var module;
-var camera;
+var $ = function(x) {
+		var theElement = document.getElementById(x);
+		return theElement;
+};
 
-// --------------------------------------------------------------------------
-// Capture functions
-// --------------------------------------------------------------------------
-var onCaptureImageSuccess = function (imageBuffer) {
-    console.log("onCaptureImageSuccess");
+// ======================Camera==================================
 
-    // Image capture success; create a DataURL from BlobBuilder and
-    // display as an image
 
-    var image = document.getElementById('image');
-    if (image.src) {
-        // Don't leak; release previous objectURL
-        webkitURL.revokeObjectURL(image.src);
-    }
-
-    var builder = new WebKitBlobBuilder();
-    builder.append(imageBuffer);
-    image.src = webkitURL.createObjectURL(builder.getBlob());
+// Get Image
+// Success Callback
+var imageSuccess = function (imageURI) {
+  $("picture").src = imageURI;
 }
 
-var onCaptureClicked = function () {
-    console.log("onCaptureClicked");
-    camera.captureImage(onCaptureImageSuccess);
-}
+// Error Callback
+var imageError = function (message) {
+  alert("An error has occured: " + message);
+};
 
-// --------------------------------------------------------------------------
-// Main load function
-// --------------------------------------------------------------------------
-var onLoad = function() {
-    console.log("onLoad");
+// Access camera - onclick button function
+var getPicture = function () {
+  navigator.camera.getPicture(imageSuccess, imageError, { quality: 50, 
+  destinationType: Camera.DestinationType.FILE_URI }); 
+};
+// ========================================================
 
-    var onCreatePreviewNodeSuccess = function (previewElement) {
-        // Preview node created; set height/width and add to DOM
-        console.log("onCreatePreviewNodeSuccess");
-        previewElement.height = 250;
-        previewElement.width = 250;
-        document.getElementById("preview_div").appendChild(previewElement);
-    }
-
-    var onGetCamerasSuccess = function(cameras) {
-        // Save camera and create preview
-        console.log("onGetCamerasSuccess");
-        camera = cameras[0];
-        console.log("  camera id: " + camera.id);
-        camera.createPreviewNode(onCreatePreviewNodeSuccess);
-    }
-
-    var onCameraLoadSuccess = function(cameraModule) {
-        // Module load success; get cameras
-        console.log("onCameraLoadSuccess");
-        module = cameraModule;
-        module.getCameras(onGetCamerasSuccess);
-    }
-
-    console.log("  loading camera module...");
-    navigator.loadModule('camera', onCameraLoadSuccess);
-} 
+$("takePic").addEventListener("click", getPicture);

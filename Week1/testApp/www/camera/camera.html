@@ -26,35 +26,23 @@
     </header>
     
     <section id="content">
-      <div id="picture_div">
+      <div id="picView">
         <center>
           <img id="picture" src=""/>
-          	
-          		<a href="#" id="camera">Take A Picture</a>
+          	<button id="takePic">Take A Picture</button>
         </center>
       </div>
     </section>
     <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
     <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
-        
-        
-    <section>
-      <!-- Preview Picture -->
-      <section id="prePic">
-        <h2 class="title">Preview Picture</h2>
-        <center>
-          <section class="icon">
-            <img id="preview" src="" alt="Preview Picture"/>
-          </section>
-        </center>
-      </section>
+
         
         <!--plugins-->
         <script type="text/javascript" src="../cordova-2.1.0.js"></script>
         
         <script src="http://code.jquery.com/jquery.js"></script>
         
-        <script type="text/javascript" src="../js/main.js"></script>
+        <script type="text/javascript" src="js/camera.js"></script>
 
       </body>  
 	

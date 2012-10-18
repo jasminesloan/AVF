@@ -57,7 +57,7 @@ button {
   font-weight: bold;
   font-size: 150%;
   text-transform: uppercase;
-  font-family: Sketch Serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   margin-bottom: 20px;
 }
 #camera {
@@ -67,7 +67,7 @@ button {
   font-weight: bold;
   font-size: 150%;
   text-transform: uppercase;
-  font-family: Sketch Serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   margin-bottom: 20px;
 }
 #prePic {

@@ -27,7 +27,7 @@
 h1 {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#353535', endColorstr='#0a0809',GradientType=0 ); /* IE6-9 */
   color: white;
-  font-family: Sketch Serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 30px;
   margin: 0px;
   padding: 2.5% 0% 2.5% 8%;
@@ -41,7 +41,7 @@ h1 {
   padding: 6% 4% 2% 4%;
 }
 p {
-  font-family: Sketch Serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 16px;
   color: white;
   text-align: center;
@@ -50,7 +50,7 @@ h2 {
   font-size: 16px;
   color: white;
   text-align: center;
-  font-family: Sketch Serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 button {
   color: #900;
@@ -58,7 +58,7 @@ button {
   font-weight: bold;
   font-size: 150%;
   text-transform: uppercase;
-  font-family: Sketch Serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   margin-left: 20px;
   margin-right: 20px;
 }

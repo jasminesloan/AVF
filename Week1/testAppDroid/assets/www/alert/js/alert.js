@@ -1,18 +1,18 @@
 	function onBodyLoad() {
-		document.addEventListener("deviceready", onDeviceReady, false);
-	}
+document.addEventListener("deviceready", onDeviceReady, false);
+}
 
-	function onDeviceReady() {
-		// do your thing!
-		phoneGapReady.innerHTML = ("")
-		
-	}
-	function vibrate() {
+function onDeviceReady() {
+// do your thing!
+phoneGapReady.innerHTML = ("")
+
+}
+function vibrate() {
         navigator.notification.vibrate(2000);
     }
 
-	
-	// alert dialog dismissed
+
+// alert dialog dismissed
     function alertDismissed() {
         // do something
     }
